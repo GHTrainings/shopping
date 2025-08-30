@@ -49,14 +49,14 @@ resource backend 'Microsoft.Web/sites@2022-09-01' = {
     serverFarmId: plan.id
     httpsOnly: true
     siteConfig: {
-      linuxFxVersion: 'DOTNET|9.0'
+      linuxFxVersion: 'DOTNETCORE|9.0'
       alwaysOn: true
       appSettings: [
         {
           name: 'ASPNETCORE_ENVIRONMENT'
           value: dotnetEnvironment
         }
-      ]      
+      ]
     }
   }
 }
