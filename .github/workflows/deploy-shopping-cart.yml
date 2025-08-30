@@ -57,7 +57,7 @@ jobs:
 
       - name: Move browser files to dist
         run: |
-          cp -r frontend/dist/browser/* frontend/dist/frontend/
+          cp -r frontend/dist/browser/* frontend/dist/
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
