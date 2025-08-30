@@ -1,4 +1,5 @@
-using 'main.bicep'
+using './main.bicep'
+
 param location = 'eastus'
 param appServicePlanName = 'asp-shopping-cart'
 param backendAppName = 'shopping-backend-api'
