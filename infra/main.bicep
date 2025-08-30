@@ -55,7 +55,7 @@ resource backend 'Microsoft.Web/sites@2022-09-01' = {
           value: dotnetEnvironment
         }
       ]
-  linuxFxVersion: 'DOTNET|9.0'
+      linuxFxVersion: 'DOTNET|9.0'
     }
   }
 }
