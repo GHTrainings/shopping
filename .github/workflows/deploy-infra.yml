@@ -1,5 +1,10 @@
 # GitHub Actions workflow to deploy Azure resources using Bicep
+
 name: Deploy Azure Infrastructure
+
+permissions:
+  id-token: write
+  contents: read
 
 on:
   workflow_dispatch:  

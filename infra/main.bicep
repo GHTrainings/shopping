@@ -1,19 +1,29 @@
 
 // main.bicep - Azure App Service setup for shopping cart (frontend + backend)
+
 param location string = 'UK West'
 param appServicePlanName string = 'asp-shopping-cart'
 param backendAppName string = 'shopping-backend-api'
 param frontendAppName string = 'shopping-frontend-app'
 
+var appServiceTier = 'Free'
+var appServiceSize = 'F1'
+var appServiceFamily = 'F'
+var appServiceCapacity = 1
+var dotnetEnvironment = 'Development'
+var nodeEnvironment = 'production'
+var nodeVersion = 'NODE|22-lts'
+var appCommandLine = 'pm2 serve /home/site/wwwroot --no-daemon --spa'
+
 resource plan 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: appServicePlanName
   location: location
   sku: {
-    name: 'F' // Free tier
-    tier: 'Free'
-    size: 'F1'
-    family: 'F'
-    capacity: 1
+    name: appServiceFamily // Free tier
+    tier: appServiceTier
+    size: appServiceSize
+    family: appServiceFamily
+    capacity: appServiceCapacity
   }
   kind: 'linux'
   properties: {
@@ -42,10 +52,10 @@ resource backend 'Microsoft.Web/sites@2022-09-01' = {
       appSettings: [
         {
           name: 'ASPNETCORE_ENVIRONMENT'
-          value: 'Development'
+          value: dotnetEnvironment
         }
       ]
-      linuxFxVersion: 'DOTNET|9.0'
+  linuxFxVersion: 'DOTNET|9.0'
     }
   }
 }
@@ -62,11 +72,11 @@ resource frontend 'Microsoft.Web/sites@2022-09-01' = {
       appSettings: [
         {
           name: 'NODE_ENV'
-          value: 'production'
+          value: nodeEnvironment
         }
       ]
-      linuxFxVersion: 'NODE|22-lts'
-      appCommandLine: 'pm2 serve /home/site/wwwroot --no-daemon --spa'
+      linuxFxVersion: nodeVersion
+      appCommandLine: appCommandLine
     }
   }
 }
