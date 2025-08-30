@@ -15,16 +15,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
       - name: Deploy Bicep template
-        uses: azure/bicep-deploy@v1
+        uses: azure/cli@v2
         with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: rg-shopping-cart
-          bicepFilePath: infra/main.bicep
-          parametersFilePath: infra/main.bicepparam
-          azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
+          azcliversion: 2.56.0
+          inlineScript: |
+            az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+            az deployment group create --resource-group rg-shopping-cart --template-file infra/main.bicep --parameters @infra/main.bicepparam
