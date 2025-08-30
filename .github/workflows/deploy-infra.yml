@@ -21,10 +21,10 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy Bicep template
-        uses: azure/arm-deploy@v2
+        uses: azure/bicep-deploy@v1
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: rg-shopping-cart
-          template: infra/main.bicep
-          bicepParametersFile: infra/main.bicepparam
-          failOnStdErr: false
+          bicepFilePath: infra/main.bicep
+          parametersFilePath: infra/main.bicepparam
+          azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
