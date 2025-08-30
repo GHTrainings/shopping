@@ -11,10 +11,22 @@ resource plan 'Microsoft.Web/serverfarms@2022-09-01' = {
   sku: {
     name: 'F' // Free tier
     tier: 'Free'
+    size: 'F1'
+    family: 'F'
+    capacity: 1
   }
   kind: 'linux'
   properties: {
+    perSiteScaling: false
+    elasticScaleEnabled: false
+    maximumElasticWorkerCount: 1
+    isSpot: false
     reserved: true
+    isXenon: false
+    hyperV: false
+    targetWorkerCount: 0
+    targetWorkerSizeId: 0
+    zoneRedundant: false
   }
 }
 
@@ -30,7 +42,7 @@ resource backend 'Microsoft.Web/sites@2022-09-01' = {
       appSettings: [
         {
           name: 'ASPNETCORE_ENVIRONMENT'
-          value: 'Production'
+          value: 'Development'
         }
       ]
       linuxFxVersion: 'DOTNET|9.0'
@@ -54,6 +66,7 @@ resource frontend 'Microsoft.Web/sites@2022-09-01' = {
         }
       ]
       linuxFxVersion: 'NODE|22-lts'
+      appCommandLine: 'pm2 serve /home/site/wwwroot --no-daemon --spa'
     }
   }
 }

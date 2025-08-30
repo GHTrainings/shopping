@@ -52,9 +52,6 @@ jobs:
       - name: Build Angular app
         run: npm run build --prefix frontend
 
-      # - name: Copy nginx.conf to dist/frontend/
-      #   run: cp frontend/src/nginx.conf frontend/dist/frontend/nginx.conf
-
       - name: Move browser files to dist
         run: |
           cp -r frontend/dist/frontend/browser/* frontend/dist/frontend/
