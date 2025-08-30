@@ -28,11 +28,17 @@ jobs:
       - name: Publish
         run: dotnet publish ./backend/backend.csproj --configuration Release --output ./publish
 
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: bestshopping-api
-          publish-profile: ${{ secrets.AZURE_BACKEND_PUBLISH_PROFILE }}
           package: ./publish
 
   build-and-deploy-frontend:
@@ -56,9 +62,15 @@ jobs:
         run: |
           cp -r frontend/dist/frontend/browser/* frontend/dist/frontend/
 
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: bestshopping
-          publish-profile: ${{ secrets.AZURE_FRONTEND_PUBLISH_PROFILE }}
           package: frontend/dist/frontend
