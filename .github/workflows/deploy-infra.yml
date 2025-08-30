@@ -31,8 +31,8 @@ jobs:
       - name: Deploy Bicep template
         uses: azure/bicep-deploy@v2
         with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: rg-shopping-cart
-          templateFile: infra/main.bicep
-          parametersFile: infra/main.bicepparam
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resource-group-name: rg-shopping-cart
+          template-file: infra/main.bicep
+          parameters-file: infra/main.bicepparam
           scope: resourceGroup
