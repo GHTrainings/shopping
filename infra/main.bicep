@@ -19,7 +19,7 @@ resource plan 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: appServicePlanName
   location: location
   sku: {
-    name: appServiceFamily // Free tier
+    name: appServiceSize // Free tier
     tier: appServiceTier
     size: appServiceSize
     family: appServiceFamily
