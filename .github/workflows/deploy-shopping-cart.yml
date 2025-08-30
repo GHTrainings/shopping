@@ -55,6 +55,10 @@ jobs:
       # - name: Copy nginx.conf to dist/frontend/
       #   run: cp frontend/src/nginx.conf frontend/dist/frontend/nginx.conf
 
+      - name: Move browser files to dist
+        run: |
+          cp -r frontend/dist/browser/* frontend/dist/frontend/
+          
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
