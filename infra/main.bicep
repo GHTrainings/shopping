@@ -1,6 +1,6 @@
 
 // main.bicep - Azure App Service setup for shopping cart (frontend + backend)
-param location string = 'eastus'
+param location string = 'centralus'
 param appServicePlanName string = 'asp-shopping-cart'
 param backendAppName string = 'shopping-backend-api'
 param frontendAppName string = 'shopping-frontend-app'
