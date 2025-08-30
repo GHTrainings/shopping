@@ -12,7 +12,10 @@ resource plan 'Microsoft.Web/serverfarms@2022-09-01' = {
     name: 'B1' // Basic tier, low cost
     tier: 'Basic'
   }
-  kind: 'app'
+  kind: 'linux'
+  properties: {
+    reserved: true
+  }
 }
 
 
