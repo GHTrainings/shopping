@@ -52,8 +52,8 @@ jobs:
       - name: Build Angular app
         run: npm run build --prefix frontend
 
-      - name: Copy nginx.conf to dist
-        run: cp frontend/src/nginx.conf frontend/dist/frontend/nginx.conf
+      - name: Copy nginx.conf to dist/frontend/browser
+        run: cp frontend/src/nginx.conf frontend/dist/frontend/browser/nginx.conf
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
